@@ -1,14 +1,18 @@
 #!/usr/bin/env php
 <?php require_once('lib/AWSSoapClient.php');
 
+/* a help message. */
 function usage() {
     echo 'usage: albumart -a[--artist=] <artist> -b[--album=] <album>'.PHP_EOL;
     exit();
 }
 
+/* fetch the large cover url for the give artist and album. use the aws 
+ * configuration in conf/aws.ini. */
 function get_album_art($_artist, $_album) {
     $wsdl = 'http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl?';
 
+    /* config */
     $options['aws_config'] = 'conf/aws.ini';
 
     $request['Request'] = array(
@@ -32,6 +36,8 @@ function get_album_art($_artist, $_album) {
     return false;
 }
 
+/* parse command-line options and return a 2-element array of 
+ * [artist,album] or an empty array. */
 function parse_options() {
     $shortopts  = 'a:b:';
     $longopts   = array(
