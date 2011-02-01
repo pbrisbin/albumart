@@ -7,17 +7,38 @@ image of a given Artist/Album.
 
 The script returns the direct url to the image for easy `wget`ting.
 
+*Note: You must have an AWS account before using this script*
+
 ### Usage
 
     $ ./albumart.php -a 'Red Hot Chili Peppers' -b 'Californication'
     http://ecx.images-amazon.com/images/I/61P2to5ZL8L.jpg
 
-### Notes
+### Lib
 
-The conf and lib directories are expected to be in the same place as the 
-script and the same place that you're currently executing the script in. 
-use the `--conf` and `--lib` arguments if this is not convenient.
+The script expects ./lib/AWSSoapClient.php from the perspective of where 
+you are when running it. Since it's not always convenient to `cd` 
+somewhere before running something, you can use the `--lib` option to 
+specify an alternate path to the directory containing AWSSoapClient.php.
 
-The ./conf directory hosted here contains my AWS Account info (Ids and 
-Keys). It's not a huge deal if you use them but it's super easy to sign 
-up for your own account. Please do.
+### AWS Authentication
+
+An [AWS][aws] account is free and easy to setup.
+
+The AWSSoapClient lib checks for authentication information in the 
+following order:
+
+    1. /etc/aws.conf
+    2. $HOME/.aws/aws.conf
+    3. Environment variables
+
+Each definition will override those that came before.
+
+The conf files should be normal php ini files, defining `cert_file` and 
+`private_key_file` as full paths to your cert-* and pk-* files which you 
+can download from your aws dashboard.
+
+The analogous environment variables are `AWS_CERT_FILE` and 
+`AWS_PRIVATE_KEY_FILE`.
+
+[aws]: http://aws.amazon.com "aws at amazon"

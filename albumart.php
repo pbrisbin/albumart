@@ -13,7 +13,6 @@ usage: albumart <options>
 
     optional options:
 
-        --conf=DIR           config files location if not ./conf
         --lib=DIR            library files location if not ./lib
 
 
@@ -26,14 +25,7 @@ EOF;
 /* fetch the large cover url for the give artist and album. use the aws 
  * configuration in conf/aws.ini. */
 function get_album_art($_artist, $_album) {
-    global $conf,$lib;
-
-    require_once($lib.'/AWSSoapClient.php');
-
     $wsdl = 'http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl?';
-
-    /* config */
-    $options['aws_config'] = $conf.'/aws.ini';
 
     $request['Request'] = array(
         'SearchIndex'   => 'Music',
@@ -42,8 +34,9 @@ function get_album_art($_artist, $_album) {
         'ResponseGroup' => 'Images'
     );
 
-    $client = new AWSSoapClient($wsdl, $options);
-    $result = $client->ItemSearch($request);
+    /* silence errors with @ */
+    @$client = new AWSSoapClient($wsdl);
+    @$result = $client->ItemSearch($request);
 
     if (isset($result->Items->Item)) {
         foreach ($result->Items->Item as $item) {
@@ -59,13 +52,12 @@ function get_album_art($_artist, $_album) {
 /* parse command-line options */
 function parse_options() {
     /* set global vars */
-    global $artist,$album,$conf,$lib;
+    global $artist,$album,$lib;
 
     $shortopts  = 'a:b:';
     $longopts   = array(
         'artist:',
         'album:',
-        'conf:',
         'lib:'
     );
 
@@ -92,10 +84,6 @@ function parse_options() {
     }
 
     /* optional */
-    if (isset($opts['conf'])) {
-        $conf = $opts['conf'];
-    }
-
     if (isset($opts['lib'])) {
         $lib = $opts['lib'];
     }
@@ -104,11 +92,15 @@ function parse_options() {
 $artist = '';
 $album  = '';
 
-/* defaults */
-$conf   = 'conf';
-$lib    = 'lib';
+/* default */
+$lib = 'lib';
 
+/* commandline flags */
 parse_options();
+
+/* see the README for authentication notes */
+require_once($lib.'/AWSSoapClient.php');
+
 $url = get_album_art($artist, $album);
 echo $url ? $url.PHP_EOL : 'no results found.'.PHP_EOL;
 
