@@ -1,4 +1,4 @@
-# Album Art
+# AlbumArt
 
 ### Description
 
@@ -7,7 +7,7 @@ image of a given Artist/Album.
 
 The script returns the direct url to the image for easy `wget`ting.
 
-*Note: You must have an AWS account before using this script*
+*Note: You must have an AWS account before using this script.*
 
 ### Usage
 
@@ -17,9 +17,10 @@ The script returns the direct url to the image for easy `wget`ting.
 ### Lib
 
 The script expects ./lib/AWSSoapClient.php from the perspective of where 
-you are when running it. Since it's not always convenient to `cd` 
-somewhere before running something, you can use the `--lib` option to 
-specify an alternate path to the directory containing AWSSoapClient.php.
+you are when running it. 
+
+You can also use the `--lib` option to specify an alternate path to the 
+directory containing AWSSoapClient.php.
 
 ### AWS Authentication
 
@@ -35,8 +36,8 @@ following order:
 Each definition will override those that came before.
 
 The conf files should be normal php ini files, defining `cert_file` and 
-`private_key_file` as full paths to your cert-* and pk-* files which you 
-can download from your aws dashboard.
+`private_key_file` as paths to your cert-* and pk-* files which you can 
+download from your aws dashboard.
 
 The analogous environment variables are `AWS_CERT_FILE` and 
 `AWS_PRIVATE_KEY_FILE`.
