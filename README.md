@@ -14,9 +14,10 @@ The script returns the direct url to the image for easy `wget`ting.
 
 ### Notes
 
-You must either execute the script in the same directory as ./conf and 
-./lib or change the paths in the script.
+The conf and lib directories are expected to be in the same place as the 
+script and the same place that you're currently executing the script in. 
+use the `--conf` and `--lib` arguments if this is not convenient.
 
-The ./conf directory available here contains my AWS Account info (Ids 
-and Keys). It's not a huge deal if you use them but it's super easy to 
-sign up for your own account. Please do.
+The ./conf directory hosted here contains my AWS Account info (Ids and 
+Keys). It's not a huge deal if you use them but it's super easy to sign 
+up for your own account. Please do.
