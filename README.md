@@ -36,14 +36,10 @@ The following environment variables must be exported or otherwise set
 before calling the script. It's how it finds its library and 
 authenticates the AWS request.
 
--------------------------------------------------------------------------------
 Variable                Value
----                     ---
+--------                -----
 AWS_LIB                 full path to the directory containing AWSSoapClient.php
-AWS_CERT_FILE           full path to your cert-\* file as downloaded 
-                        from your aws dashboard
-AWS_PRIVATE_KEY_FILE    full path to your pk-\* file as downloaded from 
-                        your aws dashboard
--------------------------------------------------------------------------------
+AWS_CERT_FILE           full path to your cert-\* file as downloaded from your aws dashboard
+AWS_PRIVATE_KEY_FILE    full path to your pk-\* file as downloaded from your aws dashboard
 
 [aws]: http://aws.amazon.com "aws at amazon"
