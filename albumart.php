@@ -6,14 +6,9 @@ function usage() {
     $message = <<<EOF
 usage: albumart <options>
 
-    required options
-
+    options:
         -a, --artist=ARTIST  artist name to search for
         -b, --album=ALBUM    album name to search for
-
-    optional options:
-
-        --lib=DIR            library files location if not ./lib
 
 
 EOF;
@@ -51,14 +46,12 @@ function get_album_art($_artist, $_album) {
 
 /* parse command-line options */
 function parse_options() {
-    /* set global vars */
-    global $artist,$album,$lib;
+    global $artist,$album;
 
-    $shortopts  = 'a:b:';
-    $longopts   = array(
+    $shortopts = 'a:b:';
+    $longopts  = array(
         'artist:',
         'album:',
-        'lib:'
     );
 
     $opts = getopt($shortopts, $longopts);
@@ -82,18 +75,19 @@ function parse_options() {
     else {
         usage(); // required
     }
-
-    /* optional */
-    if (isset($opts['lib'])) {
-        $lib = $opts['lib'];
-    }
 }
 
 $artist = '';
 $album  = '';
 
-/* default */
-$lib = 'lib';
+/* set lib */
+$env_var = 'AWS_LIB';
+if (!empty($_SERVER[$env_var])) {
+    $lib = $_SERVER[$env_var];
+}
+else {
+    $lib = 'lib';
+}
 
 /* commandline flags */
 parse_options();

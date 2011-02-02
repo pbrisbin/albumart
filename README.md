@@ -1,45 +1,49 @@
-# AlbumArt
+# Album Art
 
 ### Description
 
 A short PHP script to query Amazon Web Services for the large cover 
-image of a given Artist/Album.
+image of the passed artist and album.
 
 The script returns the direct url to the image for easy `wget`ting.
 
-*Note: You must have an AWS account before using this script.*
-
-### Usage
-
-    $ ./albumart.php -a 'Red Hot Chili Peppers' -b 'Californication'
-    http://ecx.images-amazon.com/images/I/61P2to5ZL8L.jpg
-
-### Lib
-
-The script expects ./lib/AWSSoapClient.php from the perspective of where 
-you are when running it. 
-
-You can also use the `--lib` option to specify an alternate path to the 
-directory containing AWSSoapClient.php.
-
-### AWS Authentication
+**Note: You must have an AWS account before using this script.**
 
 An [AWS][aws] account is free and easy to setup.
 
-The AWSSoapClient lib checks for authentication information in the 
-following order:
+### Usage
 
-1. /etc/aws.conf
-2. $HOME/.aws/aws.conf
-3. Environment variables
+    $ albumart.php
+    usage: albumart <options>
 
-Each definition will override those that came before.
+        options:
+            -a, --artist=ARTIST  artist name to search for
+            -b, --album=ALBUM    album name to search for
 
-The conf files should be normal php ini files, defining `cert_file` and 
-`private_key_file` as paths to your cert-\* and pk-\* files which you 
-can download from your aws dashboard.
 
-The analogous environment variables are `AWS_CERT_FILE` and 
-`AWS_PRIVATE_KEY_FILE`.
+    $ albumart.php -a 'Red Hot Chili Peppers' -b 'Californication'
+    http://ecx.images-amazon.com/images/I/61P2to5ZL8L.jpg
+
+
+
+    $ albumart.php -a 'blahblah' -b 'blahblah'
+    no results found.
+
+
+### Setup
+
+The following environment variables must be exported or otherwise set 
+before calling the script. It's how it finds its library and 
+authenticates the AWS request.
+
+-------------------------------------------------------------------------------
+Variable                Value
+---                     ---
+AWS_LIB                 full path to the directory containing AWSSoapClient.php
+AWS_CERT_FILE           full path to your cert-\* file as downloaded 
+                        from your aws dashboard
+AWS_PRIVATE_KEY_FILE    full path to your pk-\* file as downloaded from 
+                        your aws dashboard
+-------------------------------------------------------------------------------
 
 [aws]: http://aws.amazon.com "aws at amazon"
