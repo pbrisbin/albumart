@@ -25,10 +25,8 @@ An [AWS][aws] account is free and easy to setup.
     http://ecx.images-amazon.com/images/I/61P2to5ZL8L.jpg
 
 
-
     $ albumart.php -a 'blahblah' -b 'blahblah'
     no results found.
-
 
 ### Setup
 
