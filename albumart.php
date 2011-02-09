@@ -4,7 +4,7 @@
 /* a help message. */
 function usage() {
     $message = <<<EOF
-usage: albumart <options>
+usage: albumart.php -a <artist> -b <album>
 
     options:
         -a, --artist=ARTIST  artist name to search for
@@ -17,8 +17,7 @@ EOF;
     exit();
 }
 
-/* fetch the large cover url for the give artist and album. use the aws 
- * configuration in conf/aws.ini. */
+/* fetch the large cover url for the given artist and album */
 function get_album_art($_artist, $_album) {
     $wsdl = 'http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl?';
 
@@ -96,6 +95,7 @@ parse_options();
 require_once($lib.'/AWSSoapClient.php');
 
 $url = get_album_art($artist, $album);
-echo $url ? $url.PHP_EOL : 'no results found.'.PHP_EOL;
+echo $url ? $url : 'no results found.';
+echo PHP_EOL;
 
 ?>
