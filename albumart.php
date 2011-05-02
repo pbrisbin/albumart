@@ -79,6 +79,15 @@ function parse_options() {
 $artist = '';
 $album  = '';
 
+/* mandatory env vars */
+foreach (array('AWS_CERT_FILE', 'AWS_PRIVATE_KEY_FILE') as $env_var) {
+    if (empty($_SERVER[$env_var])) {
+        echo 'required environment variable '.$env_var.' is not set.'.PHP_EOL;
+        echo 'please define this variable and try again.'.PHP_EOL;
+        exit();
+    }
+}
+
 /* set lib */
 $env_var = 'AWS_LIB';
 if (!empty($_SERVER[$env_var])) {
