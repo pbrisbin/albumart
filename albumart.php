@@ -21,6 +21,8 @@ EOF;
 function get_album_art($_artist, $_album) {
     $wsdl = 'http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl?';
 
+    $request['AssociateTag'] = 'pbrisbindotco-20';
+
     $request['Request'] = array(
         'SearchIndex'   => 'Music',
         'Artist'        => $_artist,

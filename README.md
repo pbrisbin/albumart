@@ -40,4 +40,21 @@ authenticates the AWS request.
 3. `AWS_PRIVATE_KEY_FILE` - full path to your pk-\* file as downloaded 
    from your aws dashboard
 
+### Full Disclosure
+
+This script contains my Associate Tag. Recently, AWS required this as a 
+parameter to all requests (breaking this script). Rather than make 
+yet-another-environment-variable or commandline option, I chose to just 
+setup an associate tag for my site and hardcode it in the script.
+
+What does this mean?
+
+I may make 0.00000001 cents each time you use this script. To be honest, 
+I have no idea what the figures are or how it works. I don't really care 
+if this results in me making money (unless it's a lot, which I assume 
+it's not).
+
+Bottom line -- if it matters to you, get your own associate tag and 
+update line 24 in `albumart.php`.
+
 [aws]: http://aws.amazon.com "aws at amazon"
