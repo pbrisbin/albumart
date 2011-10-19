@@ -40,6 +40,16 @@ authenticates the AWS request.
 3. `AWS_PRIVATE_KEY_FILE` - full path to your pk-\* file as downloaded 
    from your aws dashboard
 
+As for system configuration, the following (non-default) extensions are 
+required for php:
+
+* openssl.so
+* soap.so
+* mcrypt.so
+
+The last requires the `php-mcrypt` package (and its `libmcrypt` 
+dependency).
+
 ### Full Disclosure
 
 This script contains my Associate Tag. Recently, AWS required this as a 
