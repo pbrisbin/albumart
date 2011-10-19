@@ -34,6 +34,14 @@ function get_album_art($_artist, $_album) {
     @$client = new AWSSoapClient($wsdl);
     @$result = $client->ItemSearch($request);
 
+    if (isset($result->Items->Request->Errors)) {
+        foreach ($result->Items->Request->Errors as $error) {
+            echo 'Soap request error: ('.$error->Code.') '.$error->Message.PHP_EOL;
+        }
+
+        exit(1);
+    }
+
     if (isset($result->Items->Item)) {
         foreach ($result->Items->Item as $item) {
             if (isset($item->LargeImage->URL)) {
